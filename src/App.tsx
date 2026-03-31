@@ -6,10 +6,11 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 const JournalPage = lazy(() => import('./pages/Home/JournalPage'));
 const SpecimenDetailPage = lazy(() => import('./pages/SpecimenDetailPage'));
 const AuthPage = lazy(() => import('./pages/AuthPage'));
+const CommunityPage = lazy(() => import('./pages/CommunityPage'));
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useAuth();
-  if (isLoading) return <div className="bg-exo-dark min-h-screen" />;
+  if (isLoading) return null;
   return user ? <>{children}</> : <Navigate to="/login" />;
 };
 
@@ -22,8 +23,8 @@ function App() {
             <Route path="/login" element={<AuthPage />} />
             <Route path="/" element={<ProtectedRoute><MainLayout><JournalPage /></MainLayout></ProtectedRoute>} />
             <Route path="/journal" element={<ProtectedRoute><MainLayout><JournalPage /></MainLayout></ProtectedRoute>} />
+            <Route path="/community" element={<ProtectedRoute><MainLayout><CommunityPage /></MainLayout></ProtectedRoute>} />
             <Route path="/specimen/:id" element={<ProtectedRoute><MainLayout><SpecimenDetailPage /></MainLayout></ProtectedRoute>} />
-            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Suspense>
       </Router>
