@@ -1,8 +1,0 @@
-﻿{
-  "name": "exo-public",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
-}
